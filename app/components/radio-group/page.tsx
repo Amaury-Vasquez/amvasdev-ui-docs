@@ -1,13 +1,13 @@
 "use client";
+import { RadioGroup, RadioOption } from "amvasdev-ui";
 import { useState } from "react";
-import { RadioGroup } from "amvasdev-ui";
 import { COMPONENTS_DATA } from "@/data/components";
 
 const radioGroupData = COMPONENTS_DATA["radio-group"];
 
 export default function RadioGroupPage() {
-  const [selectedOption, setSelectedOption] = useState();
-  const [selectedOption2, setSelectedOption2] = useState();
+  const [selectedOption, setSelectedOption] = useState<RadioOption>();
+  const [selectedOption2, setSelectedOption2] = useState<RadioOption>();
 
   const options = [
     { id: "yes", name: "Yes" },
@@ -28,9 +28,7 @@ export default function RadioGroupPage() {
         <h2 className="text-2xl font-semibold mb-3">Import</h2>
         <div className="mockup-code">
           <pre>
-            <code>
-              {radioGroupData.importStatement}
-            </code>
+            <code>{radioGroupData.importStatement}</code>
           </pre>
         </div>
       </div>

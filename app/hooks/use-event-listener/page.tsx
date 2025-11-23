@@ -1,6 +1,6 @@
 "use client";
-import { useState, useRef } from "react";
 import { useEventListener, Button } from "amvasdev-ui";
+import { useState, useRef } from "react";
 import { HOOKS_DATA } from "@/data/hooks";
 
 const hookData = HOOKS_DATA["use-event-listener"];
@@ -20,6 +20,7 @@ export default function UseEventListenerPage() {
     () => {
       setClickCount((prev) => prev + 1);
     },
+    // @ts-expect-error Type mismatch
     buttonRef
   );
 
@@ -80,7 +81,9 @@ export default function UseEventListenerPage() {
         <h2 className="text-2xl font-semibold mb-4">Live Demo</h2>
         <div className="space-y-6">
           <div className="p-6 bg-base-200 rounded-lg">
-            <h3 className="text-lg font-semibold mb-2">Window Event Listener</h3>
+            <h3 className="text-lg font-semibold mb-2">
+              Window Event Listener
+            </h3>
             <p className="text-base-content/70 mb-4">
               Press any key to see it detected:
             </p>
@@ -95,7 +98,9 @@ export default function UseEventListenerPage() {
           </div>
 
           <div className="p-6 bg-base-200 rounded-lg">
-            <h3 className="text-lg font-semibold mb-2">Element Event Listener</h3>
+            <h3 className="text-lg font-semibold mb-2">
+              Element Event Listener
+            </h3>
             <p className="text-base-content/70 mb-4">
               Click the button to increment the counter:
             </p>
@@ -113,7 +118,9 @@ export default function UseEventListenerPage() {
             <div key={index}>
               <h3 className="text-xl font-semibold mb-3">{example.title}</h3>
               {example.description ? (
-                <p className="text-base-content/70 mb-3">{example.description}</p>
+                <p className="text-base-content/70 mb-3">
+                  {example.description}
+                </p>
               ) : null}
               <div className="mockup-code">
                 <pre>

@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "amvasdev-ui/dist/index.css";
 import "./globals.css";
 import MainLayout from "@/layouts/MainLayout";
+import Provider from "@/providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,7 +36,9 @@ export default function RootLayout({
           "antialiased bg-linear-to-br from-base-100 to-base-200 min-h-svh"
         )}
       >
-        <MainLayout>{children}</MainLayout>
+        <Provider>
+          <MainLayout>{children}</MainLayout>
+        </Provider>
       </body>
     </html>
   );

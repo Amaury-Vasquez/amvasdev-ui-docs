@@ -1,11 +1,11 @@
 "use client";
+import { Combobox, IComboboxOption } from "amvasdev-ui";
 import { useState } from "react";
-import { Combobox } from "amvasdev-ui";
 import { COMPONENTS_DATA } from "@/data/components";
 
 const comboboxData = COMPONENTS_DATA.combobox;
 
-const OPTIONS = [
+const OPTIONS: IComboboxOption[] = [
   { id: "1", text: "Apple" },
   { id: "2", text: "Banana" },
   { id: "3", text: "Cherry" },
@@ -14,7 +14,9 @@ const OPTIONS = [
 
 export default function ComboboxPage() {
   const [value, setValue] = useState("");
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState<
+    IComboboxOption | null | undefined
+  >(null);
 
   return (
     <div className="space-y-8">
@@ -29,9 +31,7 @@ export default function ComboboxPage() {
         <h2 className="text-2xl font-semibold mb-3">Import</h2>
         <div className="mockup-code">
           <pre>
-            <code>
-              {comboboxData.importStatement}
-            </code>
+            <code>{comboboxData.importStatement}</code>
           </pre>
         </div>
       </div>

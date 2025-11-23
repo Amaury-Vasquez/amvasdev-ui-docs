@@ -1,12 +1,12 @@
 "use client";
-import { useState } from "react";
 import { DateInput } from "amvasdev-ui";
+import { useState } from "react";
 import { COMPONENTS_DATA } from "@/data/components";
 
 const dateInputData = COMPONENTS_DATA["date-input"];
 
 export default function DateInputPage() {
-  const [selectedDate, setSelectedDate] = useState();
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>();
 
   return (
     <div className="space-y-8">
@@ -21,9 +21,7 @@ export default function DateInputPage() {
         <h2 className="text-2xl font-semibold mb-3">Import</h2>
         <div className="mockup-code">
           <pre>
-            <code>
-              {dateInputData.importStatement}
-            </code>
+            <code>{dateInputData.importStatement}</code>
           </pre>
         </div>
       </div>

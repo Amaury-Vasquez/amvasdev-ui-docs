@@ -1,12 +1,14 @@
 "use client";
-import { useState } from "react";
 import { Calendar } from "amvasdev-ui";
+import { useState } from "react";
 import { COMPONENTS_DATA } from "@/data/components";
 
 const calendarData = COMPONENTS_DATA.calendar;
 
 export default function CalendarPage() {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(
+    new Date()
+  );
 
   return (
     <div className="space-y-8">
@@ -21,9 +23,7 @@ export default function CalendarPage() {
         <h2 className="text-2xl font-semibold mb-3">Import</h2>
         <div className="mockup-code">
           <pre>
-            <code>
-              {calendarData.importStatement}
-            </code>
+            <code>{calendarData.importStatement}</code>
           </pre>
         </div>
       </div>
