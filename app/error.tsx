@@ -25,7 +25,7 @@ export default function Error({ error, reset }: ErrorProps) {
   }, [error, pathname, posthog]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] px-4 py-12">
+    <div className="flex flex-col items-center justify-center md:min-h-[calc(100vh-23.1875rem-4rem)] px-4 py-12">
       <div className="max-w-2xl w-full text-center space-y-8">
         {/* Error Icon */}
         <div className="space-y-4">
