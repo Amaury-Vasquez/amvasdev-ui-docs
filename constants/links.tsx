@@ -90,4 +90,4 @@ export const NAV_SECTIONS: NavSection[] = [
 ];
 
 export const NPM_PACKAGE_URL = "https://www.npmjs.com/package/amvasdev-ui";
-export const GITHUB_URL = "https://github.com/amauryvasquez/amvasdev-ui";
+export const GITHUB_URL = "https://github.com/Amaury-Vasquez/amvasdev-ui";

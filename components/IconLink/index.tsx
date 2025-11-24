@@ -43,10 +43,15 @@ const IconLink = ({
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
       target={target}
+      onClick={onMouseLeave}
     >
       {icon}
       {(isHovered || isFocused) && tooltip ? (
-        <Tooltip content={tooltip.content} position={tooltip.position} />
+        <Tooltip
+          content={tooltip.content}
+          position={tooltip.position}
+          className="z-30"
+        />
       ) : null}
     </Link>
   );

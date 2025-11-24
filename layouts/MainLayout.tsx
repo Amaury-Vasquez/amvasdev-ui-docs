@@ -8,10 +8,10 @@ interface MainLayoutProps {
 }
 
 const MainLayout = ({ children }: MainLayoutProps) => (
-  <div className="flex relative">
+  <div className="flex">
     <Sidebar />
-    <div className="flex flex-col w-full h-svh overflow-y-auto">
-      <Navbar className="" />
+    <div className="flex flex-col w-full h-svh overflow-y-auto relative">
+      <Navbar className="sticky top-0 w-full" />
       <main className="flex-1">{children}</main>
       <Footer />
     </div>

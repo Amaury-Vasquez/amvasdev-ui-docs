@@ -21,7 +21,7 @@ const ShrinkedNav = ({ pathname }: ShrinkedNavProps) => (
           href={section.basePath}
           icon={<Icon size={20} />}
           tooltip={{ content: section.title, position: "right" }}
-          className={clsx("w-10 h-10 z-50", {
+          className={clsx("w-10 h-10", {
             "bg-base-300 text-primary": isActive,
           })}
         />

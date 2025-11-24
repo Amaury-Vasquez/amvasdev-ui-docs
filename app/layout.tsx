@@ -17,9 +17,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Amvasdev UI - Documentation",
+  title: "Amvasdev UI - React Component Library with DaisyUI Styling",
   description:
-    "Documentation for the Amvasdev UI component library, built using React and DaisyUI",
+    "A comprehensive React component library combining DaisyUI styling with custom JavaScript implementations. Production-ready components, utility hooks, and TypeScript support.",
 };
 
 export default function RootLayout({

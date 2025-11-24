@@ -19,7 +19,7 @@ const Searchbar = () => {
   const [showResults, setShowResults] = useState(false);
 
   return (
-    <div className="relative w-80 max-w-full">
+    <div className="relative md:w-80 w-full max-w-full">
       <Input
         id="search"
         placeholder="Search"

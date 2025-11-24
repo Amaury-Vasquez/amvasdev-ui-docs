@@ -188,6 +188,52 @@ export const maxRetryAttempts = 3;
 
 ## Development Notes
 
+### Device Detection Context
+
+**IMPORTANT**: When you need to detect the device type on the client side, always use the `DeviceContext`:
+
+**✅ Correct:**
+```tsx
+import { useDevice } from "@/contexts/DeviceContext";
+
+export default function Component() {
+  const { isMobile, isTablet, isMobileOrTablet } = useDevice();
+
+  return (
+    <div>
+      {isMobile ? <MobileView /> : <DesktopView />}
+    </div>
+  );
+}
+```
+
+**❌ Incorrect:**
+```tsx
+// Don't call the hooks directly in components
+import useIsMobile from "@/hooks/useIsMobile";
+
+export default function Component() {
+  const isMobile = useIsMobile();
+  // ...
+}
+```
+
+**Why this matters:**
+- The hooks use `useBreakpoint` which listens to window resize events
+- Calling them multiple times creates multiple event listeners
+- The context calls the hooks once and shares the values across all components
+- Better performance and reduced memory usage
+
+**Available values from `useDevice()`:**
+- `isMobile`: boolean - viewport is <= 640px (sm breakpoint)
+- `isTablet`: boolean - viewport is >= 640px and < 1024px (sm to lg)
+- `isMobileOrTablet`: boolean - viewport is < 1024px (lg breakpoint)
+
+**Context Location:**
+- Provider: `DeviceProvider` from `@/contexts/DeviceContext`
+- Hook: `useDevice()` from `@/contexts/DeviceContext`
+- Must be used within the `DeviceProvider` (already set up in Sidebar)
+
 ### Working with amvasdev-ui Library
 
 When creating documentation or examples for `amvasdev-ui` components:
@@ -303,6 +349,109 @@ function App() {
 ```
 
 ## Project Architecture
+
+### Module-Based Architecture for SEO
+
+**CRITICAL**: All documentation pages use a module-based architecture to support SEO metadata while maintaining client-side interactivity.
+
+**Structure:**
+```
+app/
+  components/
+    button/
+      page.tsx              # Server component - exports metadata, renders module
+
+modules/
+  ButtonPage/
+    index.tsx              # Main client component with page content
+    BasicUsageExample.tsx  # Page-specific example components
+    VariantsExample.tsx
+    ...
+
+components/documentation/   # Shared documentation components
+  PageHeader.tsx
+  ImportSection.tsx
+  ExampleBlock.tsx
+  AvailableOptions.tsx
+  NotesSection.tsx
+```
+
+**Page Pattern (app/.../page.tsx):**
+```tsx
+import type { Metadata } from "next";
+import ButtonPage from "@/modules/ButtonPage";
+import { COMPONENTS_DATA } from "@/data/components";
+
+const componentData = COMPONENTS_DATA.button;
+
+export const metadata: Metadata = {
+  title: `${componentData.name} | Amvasdev UI`,
+  description: componentData.description,
+};
+
+export default function Page() {
+  return <ButtonPage />;
+}
+```
+
+**Module Index Pattern (modules/ButtonPage/index.tsx):**
+```tsx
+import PageHeader from "@/components/documentation/PageHeader";
+import ImportSection from "@/components/documentation/ImportSection";
+import { COMPONENTS_DATA } from "@/data/components";
+import BasicUsageExample from "./BasicUsageExample";
+// ... other imports
+
+const componentData = COMPONENTS_DATA.button;
+
+const ButtonPage = () => (
+  <div className="flex flex-col gap-4 p-4 md:gap-8 md:p-8">
+    <PageHeader title={componentData.name} description={componentData.description} />
+    <ImportSection importStatement={componentData.importStatement} />
+    <BasicUsageExample />
+    {/* ... more content */}
+  </div>
+);
+
+export default ButtonPage;
+```
+
+**Page-Specific Components (modules/ButtonPage/BasicUsageExample.tsx):**
+```tsx
+"use client";
+import { Button } from "amvasdev-ui";
+import ExampleBlock from "@/components/documentation/ExampleBlock";
+
+const BasicUsageExample = () => (
+  <ExampleBlock
+    title="Basic Usage"
+    preview={<Button>Click me</Button>}
+    code={`<Button>Click me</Button>`}
+  />
+);
+
+export default BasicUsageExample;
+```
+
+**Naming Conventions:**
+- **Modules:** CamelCase (e.g., `ButtonPage`, `UseTogglePage`)
+- **Module exports:** Same as folder name (e.g., `ButtonPage`)
+- **Page-specific components:** Descriptive names (e.g., `BasicUsageExample`, `VariantsExample`)
+
+**Shared Documentation Components:**
+- `PageHeader` - Title and description
+- `ImportSection` - Import code block
+- `ExampleBlock` - Example with preview and code
+- `AvailableOptions` - List of variants/sizes/options
+- `NotesSection` - Notes list
+
+**"use client" Directive:**
+- Add ONLY to page-specific components that render client components (Button, Input, etc.)
+- NOT needed in module index.tsx (child components already have it)
+- NOT needed in page.tsx (server component for metadata)
+- NOT needed in shared documentation components (they're just presentational)
+
+**Rule:** Only add "use client" to the component that directly uses client-side features. Parent components can remain server components and render client component children.
 
 ### Data Files Pattern
 

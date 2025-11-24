@@ -1,68 +1,43 @@
 "use client";
-import { IconButton, useToggle } from "amvasdev-ui";
-import packageJson from "amvasdev-ui/package.json";
+import { useOnClickOutside, useToggle } from "amvasdev-ui";
 import clsx from "clsx";
-import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { usePathname } from "next/navigation";
-import ExpandedNav from "./ExpandedNav";
-import ShrinkedNav from "./ShrinkedNav";
-import Logo from "../Logo";
+import { useEffect, useRef } from "react";
+import useIsMobileOrTablet from "@/hooks/useIsMobileOrTablet";
+import SidebarContent from "./SidebarContent";
 
 const Sidebar = () => {
   const [isExpanded, toggleIsExpanded] = useToggle(false);
+  const isMobileOrTablet = useIsMobileOrTablet();
+  const sidebarRef = useRef<HTMLDivElement>(null);
+  const pathnameRef = useRef<string>("");
   const pathname = usePathname();
+
+  useOnClickOutside(sidebarRef, () => {
+    if (isExpanded && isMobileOrTablet) toggleIsExpanded();
+  });
+
+  useEffect(() => {
+    if (pathname !== pathnameRef.current && isExpanded && isMobileOrTablet) {
+      toggleIsExpanded();
+    }
+    pathnameRef.current = pathname;
+  }, [pathname, isExpanded, isMobileOrTablet, toggleIsExpanded]);
 
   return (
     <div
-      className={clsx("flex flex-col h-svh bg-base-200 transition-[width]", {
-        "w-14": !isExpanded,
-        "w-72": isExpanded,
+      className={clsx("h-svh flex-1 transition-colors", {
+        "fixed bg-black/30 z-20 w-screen": isExpanded && isMobileOrTablet,
+        "bg-transparent": !isExpanded,
+        "w-fit": !isMobileOrTablet,
       })}
     >
-      <div
-        className={clsx("h-16 flex items-center w-full p-2", {
-          "justify-center": !isExpanded,
-          "justify-between": isExpanded,
-        })}
-      >
-        {isExpanded ? (
-          <div className="flex flex-col gap-0.5">
-            <div className="flex items-baseline gap-1">
-              <Logo />
-            </div>
-            <span className="text-xs text-base-content/60 font-medium">
-              v{packageJson.version}
-            </span>
-          </div>
-        ) : null}
-        <IconButton
-          icon={
-            isExpanded ? (
-              <PanelLeftClose className="text-primary" />
-            ) : (
-              <PanelLeftOpen className="text-primary" />
-            )
-          }
-          onClick={toggleIsExpanded}
-        />
-      </div>
-
-      {/* Navigation Menu */}
-      <nav
-        className={clsx(
-          "h-full flex flex-col border border-solid border-r-base-300 border-transparent",
-          {
-            "p-2 overflow-visible": !isExpanded,
-            "p-4 overflow-y-auto": isExpanded,
-          }
-        )}
-      >
-        {isExpanded ? (
-          <ExpandedNav pathname={pathname} />
-        ) : (
-          <ShrinkedNav pathname={pathname} />
-        )}
-      </nav>
+      <SidebarContent
+        isExpanded={isExpanded}
+        toggleIsExpanded={toggleIsExpanded}
+        ref={sidebarRef}
+        pathname={pathname}
+      />
     </div>
   );
 };

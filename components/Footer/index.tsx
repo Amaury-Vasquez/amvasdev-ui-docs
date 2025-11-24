@@ -1,5 +1,6 @@
 import { Boxes, ExternalLink, Github, Heart } from "lucide-react";
 import Link from "next/link";
+import { GITHUB_URL } from "@/constants/links";
 import IconLink from "../IconLink";
 
 const CURRENT_YEAR = new Date().getFullYear();
@@ -14,7 +15,7 @@ const DOCUMENTATION_LINKS = [
 
 const RESOURCE_LINKS = [
   {
-    href: "https://github.com/Amaury-Vasquez/amvasdev-ui",
+    href: GITHUB_URL,
     label: "GitHub",
     icon: <Github size={16} />,
   },
@@ -57,7 +58,7 @@ const Footer = () => (
           </p>
           <div className="flex gap-2">
             <IconLink
-              href="https://github.com/Amaury-Vasquez/amvasdev-ui"
+              href={GITHUB_URL}
               target="_blank"
               icon={<Github size={20} />}
               tooltip={{ content: "View on GitHub", position: "top" }}
@@ -149,7 +150,7 @@ const Footer = () => (
       {/* Bottom Bar */}
       <div className="border-t border-base-300 pt-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-base-content/60">
-          <p>� {CURRENT_YEAR} amvasdev-ui. All rights reserved.</p>
+          <p>© {CURRENT_YEAR} amvasdev-ui. All rights reserved.</p>
           <p>Built with React, Next.js, Tailwind CSS, and DaisyUI</p>
         </div>
       </div>

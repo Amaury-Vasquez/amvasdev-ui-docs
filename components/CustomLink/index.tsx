@@ -11,6 +11,7 @@ interface CustomLinkProps {
   size?: ButtonSize;
   outlined?: boolean;
   className?: string;
+  target?: string;
 }
 
 /**
@@ -36,6 +37,7 @@ const CustomLink = ({
   size = "md",
   outlined = false,
   className = "",
+  target = "_self",
 }: CustomLinkProps) => {
   const buttonClasses = getButtonClasses({
     variant,
@@ -44,7 +46,11 @@ const CustomLink = ({
   });
 
   return (
-    <Link href={href} className={clsx(buttonClasses, className)}>
+    <Link
+      href={href}
+      className={clsx(buttonClasses, className)}
+      target={target}
+    >
       {children}
     </Link>
   );
