@@ -147,6 +147,94 @@ const router = useRouter();
 - **`IconLink`** (`@/components/IconLink`) - Icon with tooltip, styled as circular button
 - **`CustomLink`** (`@/components/CustomLink`) - Text link styled as button with variant/size options
 
+### Accessibility - Required aria-label Attributes
+
+**CRITICAL: All interactive elements must have descriptive aria-label attributes for screen reader accessibility.**
+
+**Required for:**
+
+- All `<Link>` elements from Next.js
+- All anchor tags (`<a>`)
+- All `<button>` elements
+- All `CustomLink` components (use `ariaLabel` prop)
+- All `IconLink` components (use `ariaLabel` prop)
+- All `IconButton` components (use `ariaLabel` prop or `aria-label` attribute)
+- Any other interactive elements without visible text
+
+**✅ Correct:**
+
+```tsx
+// Next.js Link with aria-label
+<Link href="/about" aria-label="Navigate to About page">
+  <Icon />
+</Link>
+
+// CustomLink with ariaLabel prop
+<CustomLink href="/dashboard" variant="primary" ariaLabel="Go to dashboard">
+  Dashboard
+</CustomLink>
+
+// IconLink with ariaLabel prop
+<IconLink
+  href="/settings"
+  icon={<SettingsIcon />}
+  ariaLabel="Navigate to settings"
+  tooltip={{ content: "Settings", position: "top" }}
+/>
+
+// Button with aria-label
+<button onClick={handleClick} aria-label="Close modal">
+  <CloseIcon />
+</button>
+
+// IconButton with ariaLabel prop
+<IconButton
+  icon={<MenuIcon />}
+  onClick={toggleMenu}
+  ariaLabel="Open navigation menu"
+/>
+```
+
+**❌ Incorrect:**
+
+```tsx
+// Missing aria-label on link with only icon
+<Link href="/about">
+  <Icon />
+</Link>
+
+// Missing ariaLabel on CustomLink
+<CustomLink href="/dashboard" variant="primary">
+  Dashboard
+</CustomLink>
+
+// Missing aria-label on button with only icon
+<button onClick={handleClick}>
+  <CloseIcon />
+</button>
+```
+
+**Guidelines:**
+
+- **Be descriptive**: Use clear, actionable descriptions (e.g., "Navigate to About page" not just "About")
+- **Include context**: Specify what the action will do (e.g., "View amvasdev-ui on NPM" not just "NPM")
+- **Avoid redundancy**: If the element already has visible descriptive text, aria-label enhances but doesn't replace it
+- **Icon-only elements**: Always require aria-label as there's no visible text for screen readers
+- **Dynamic labels**: Use template literals for contextual descriptions (e.g., `` `${isExpanded ? "Collapse" : "Expand"} sidebar` ``)
+
+**Component-Specific Notes:**
+
+- **`CustomLink` and `IconLink`**: These components have a fallback using `getAriaLabelFromHref()` utility, but always provide explicit `ariaLabel` prop for clarity
+- **`HamburgerMenu`**: Use `aria-label` attribute (lowercase with hyphen)
+- **Collapsible sections**: Include `aria-expanded` attribute along with `aria-label`
+
+**Why this matters:**
+
+- **Accessibility**: Screen reader users rely on aria-labels to understand interactive elements
+- **WCAG Compliance**: Meets Web Content Accessibility Guidelines requirements
+- **Better UX**: Provides context for all users, including those with visual impairments
+- **SEO**: Helps search engines understand page structure and navigation
+
 ### Import Organization
 
 Imports are automatically sorted by ESLint in this order:
