@@ -7,7 +7,12 @@ const CustomPositionExample = () => (
   <ExampleBlock
     title="With Custom Position"
     preview={
-      <HamburgerMenu icon={Menu} position="right">
+      <HamburgerMenu
+        icon={Menu}
+        position="right"
+        buttonId="open-hamburger-menu"
+        buttonAriaLabel="Open Hamburger Menu"
+      >
         <li>
           <a>Option 1</a>
         </li>

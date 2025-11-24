@@ -12,6 +12,8 @@ const CustomStylingExample = () => (
         iconSize={24}
         iconButtonClassName="text-primary"
         menuClassName="min-w-48"
+        buttonId="open-hamburger-menu"
+        buttonAriaLabel="Open Hamburger Menu"
       >
         <li>
           <a>Dashboard</a>

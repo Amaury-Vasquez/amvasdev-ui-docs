@@ -6,7 +6,13 @@ import { GITHUB_URL, NPM_PACKAGE_URL } from "@/constants/links";
 import ThemeModal from "./ThemeModal";
 
 const MobileNavMenu = () => (
-  <HamburgerMenu icon={Menu} className="md:hidden" position="right">
+  <HamburgerMenu
+    icon={Menu}
+    className="md:hidden"
+    position="right"
+    buttonId="open-mobile-nav"
+    buttonAriaLabel="Open Mobile Nav Menu"
+  >
     <nav className="flex flex-col w-48 gap-4 p-2">
       <Link
         className="flex items-center gap-2"

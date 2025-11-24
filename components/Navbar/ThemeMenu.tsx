@@ -12,6 +12,8 @@ const ThemeMenu = () => {
       icon={Palette}
       menuClassName="max-h-80 overflow-y-auto"
       position="right"
+      buttonId="open-theme-menu"
+      buttonAriaLabel="Open Theme Menu"
     >
       <ThemeList theme={theme} handleThemeChange={handleThemeChange} />
     </HamburgerMenu>

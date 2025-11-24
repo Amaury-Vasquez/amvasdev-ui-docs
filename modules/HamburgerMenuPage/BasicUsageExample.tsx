@@ -7,7 +7,11 @@ const BasicUsageExample = () => (
   <ExampleBlock
     title="Basic Usage"
     preview={
-      <HamburgerMenu icon={Menu}>
+      <HamburgerMenu
+        icon={Menu}
+        buttonId="open-hamburger-menu"
+        buttonAriaLabel="Open Hamburger Menu"
+      >
         <li>
           <a>Profile</a>
         </li>
@@ -22,7 +26,7 @@ const BasicUsageExample = () => (
     code={`import { Menu } from "lucide-react";
   import { HamburgerMenu } from "amvasdev-ui";
 
-  <HamburgerMenu icon={Menu}>
+  <HamburgerMenu icon={Menu} buttonId="open-hamburger-menu" buttonAriaLabel="Open Hamburger Menu">
     <li><a>Profile</a></li>
     <li><a>Settings</a></li>
     <li><a>Logout</a></li>
