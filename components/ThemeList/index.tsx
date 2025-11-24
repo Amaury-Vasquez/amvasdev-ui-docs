@@ -50,6 +50,8 @@ const ThemeList = ({ theme, handleThemeChange }: ThemeListProps) => (
           <button
             className="flex"
             onClick={() => handleThemeChange(currentTheme)}
+            id={`theme-${currentTheme}-button`}
+            aria-label={`Select ${currentTheme} theme`}
           >
             <ColorPalette
               theme={currentTheme}

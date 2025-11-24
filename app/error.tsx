@@ -67,6 +67,7 @@ export default function Error({ error, reset }: ErrorProps) {
           <button
             onClick={reset}
             className="btn btn-primary btn-lg gap-2 min-w-[160px]"
+            id="error-try-again-button"
             aria-label="Try again"
           >
             <RefreshCw size={18} />
@@ -110,6 +111,7 @@ export default function Error({ error, reset }: ErrorProps) {
           <button
             onClick={() => router.back()}
             className="inline-flex items-center gap-2 text-sm text-base-content/60 hover:text-primary transition-colors group"
+            id="error-go-back-button"
             aria-label="Go back to previous page"
           >
             <ArrowLeft

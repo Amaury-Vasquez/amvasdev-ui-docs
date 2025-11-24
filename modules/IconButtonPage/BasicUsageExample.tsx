@@ -6,7 +6,13 @@ import ExampleBlock from "@/components/documentation/ExampleBlock";
 const BasicUsageExample = () => (
   <ExampleBlock
     title="Basic Usage"
-    preview={<IconButton icon={<Settings size={20} />} />}
+    preview={
+      <IconButton
+        icon={<Settings size={20} />}
+        id="basic-icon-button-example"
+        aria-label="Settings button"
+      />
+    }
     code={`import { Settings } from "lucide-react";
   import { IconButton } from "amvasdev-ui";
 

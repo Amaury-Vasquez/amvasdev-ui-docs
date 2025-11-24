@@ -8,10 +8,17 @@ const TooltipExample = () => (
     title="With Tooltip"
     preview={
       <div className="flex gap-4">
-        <IconButton icon={<Edit size={18} />} tooltip="Edit item" />
+        <IconButton
+          icon={<Edit size={18} />}
+          tooltip="Edit item"
+          id="icon-button-edit-tooltip"
+          aria-label="Edit item"
+        />
         <IconButton
           icon={<Trash size={18} />}
           tooltip={{ content: "Delete", position: "left" }}
+          id="icon-button-delete-tooltip"
+          aria-label="Delete item"
         />
       </div>
     }

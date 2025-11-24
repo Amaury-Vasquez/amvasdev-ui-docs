@@ -85,7 +85,13 @@ const InteractiveDemo = () => {
 
       <div>
         <p className="font-semibold mb-2">Preview:</p>
-        <button className={generatedClasses}>Generated Button</button>
+        <button
+          className={generatedClasses}
+          id="button-utilities-generated-button"
+          aria-label="Generated button preview"
+        >
+          Generated Button
+        </button>
       </div>
 
       <div>

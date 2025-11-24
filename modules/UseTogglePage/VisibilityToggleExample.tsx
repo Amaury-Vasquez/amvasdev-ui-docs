@@ -7,7 +7,12 @@ const VisibilityToggleExample = () => {
   return (
     <div className="p-6 bg-base-200 rounded-lg">
       <h3 className="text-lg font-semibold mb-3">Visibility Toggle</h3>
-      <Button variant="primary" onClick={toggleVisibility}>
+      <Button
+        variant="primary"
+        onClick={toggleVisibility}
+        id="visibility-toggle-button"
+        aria-label={`${isVisible ? "Hide" : "Show"} content`}
+      >
         {isVisible ? "Hide" : "Show"} Content
       </Button>
       {isVisible && (

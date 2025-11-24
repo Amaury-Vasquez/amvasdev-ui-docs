@@ -11,7 +11,12 @@ const BasicModalExample = () => {
       title="Basic Modal"
       preview={
         <>
-          <Button variant="primary" onClick={() => setIsOpen(true)}>
+          <Button
+            variant="primary"
+            onClick={() => setIsOpen(true)}
+            id="basic-modal-open-button"
+            aria-label="Open basic modal"
+          >
             Open Modal
           </Button>
           {isOpen && (

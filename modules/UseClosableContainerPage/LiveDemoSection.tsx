@@ -11,7 +11,12 @@ const LiveDemoSection = () => {
       <section>
         <h2 className="text-xl md:text-2xl font-semibold mb-4">Live Demo</h2>
         <div className="p-6 bg-base-200 rounded-lg">
-          <Button variant="primary" onClick={() => setIsModalOpen(true)}>
+          <Button
+            variant="primary"
+            onClick={() => setIsModalOpen(true)}
+            id="closable-container-open-button"
+            aria-label="Open demo modal"
+          >
             Open Demo Modal
           </Button>
           <p className="text-sm text-base-content/70 mt-2">

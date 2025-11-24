@@ -8,10 +8,20 @@ const EnableDisableToggleExample = () => {
     <div className="p-6 bg-base-200 rounded-lg">
       <h3 className="text-lg font-semibold mb-3">Enable/Disable Toggle</h3>
       <div className="flex gap-2 items-center">
-        <Button variant="neutral" onClick={toggleEnabled}>
+        <Button
+          variant="neutral"
+          onClick={toggleEnabled}
+          id="enable-disable-toggle-button"
+          aria-label={`${isEnabled ? "Disable" : "Enable"} feature`}
+        >
           {isEnabled ? "Disable" : "Enable"} Feature
         </Button>
-        <Button variant="primary" disabled={!isEnabled}>
+        <Button
+          variant="primary"
+          disabled={!isEnabled}
+          id="enable-disable-submit-button"
+          aria-label="Submit form"
+        >
           Submit
         </Button>
       </div>

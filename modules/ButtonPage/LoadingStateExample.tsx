@@ -7,11 +7,19 @@ const LoadingStateExample = () => (
     title="Loading State"
     preview={
       <>
-        <Button isLoading>Loading...</Button>
+        <Button
+          isLoading
+          id="loading-button-default"
+          aria-label="Loading button with default spinner"
+        >
+          Loading...
+        </Button>
         <Button
           isLoading
           loadingStyles={{ type: "dots", size: "sm" }}
           disabledOnLoading={false}
+          id="loading-button-custom"
+          aria-label="Loading button with custom dots spinner"
         >
           Custom Loading
         </Button>

@@ -11,7 +11,12 @@ const WarningModalExample = () => {
       title="Warning Modal"
       preview={
         <>
-          <Button variant="primary" onClick={() => setIsOpen(true)}>
+          <Button
+            variant="primary"
+            onClick={() => setIsOpen(true)}
+            id="warning-modal-open-button"
+            aria-label="Open warning modal"
+          >
             Show Warning Modal
           </Button>
           {isOpen && (

@@ -57,6 +57,7 @@ const SidebarContent = forwardRef<HTMLDivElement, SidebarContentProps>(
             )
           }
           onClick={toggleIsExpanded}
+          id="sidebar-toggle-button"
           aria-label={isExpanded ? "Collapse sidebar" : "Expand sidebar"}
         />
       </div>

@@ -11,7 +11,12 @@ const ActionButtonsExample = () => {
       title="Modal with Action Buttons"
       preview={
         <>
-          <Button variant="primary" onClick={() => setIsOpen(true)}>
+          <Button
+            variant="primary"
+            onClick={() => setIsOpen(true)}
+            id="action-modal-delete-button"
+            aria-label="Open delete item modal"
+          >
             Delete Item
           </Button>
           {isOpen && (

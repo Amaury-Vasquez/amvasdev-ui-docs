@@ -20,6 +20,8 @@ const DropdownDemo = () => {
         <Button
           variant="primary"
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          id="dropdown-toggle-button"
+          aria-label={`${isDropdownOpen ? "Close" : "Open"} dropdown menu`}
         >
           {isDropdownOpen ? "Close" : "Open"} Dropdown
         </Button>

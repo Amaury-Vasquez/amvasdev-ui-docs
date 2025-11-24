@@ -11,7 +11,12 @@ const SuccessModalExample = () => {
       title="Success Modal"
       preview={
         <>
-          <Button variant="primary" onClick={() => setIsOpen(true)}>
+          <Button
+            variant="primary"
+            onClick={() => setIsOpen(true)}
+            id="success-modal-open-button"
+            aria-label="Open success modal"
+          >
             Show Success Modal
           </Button>
           {isOpen && (

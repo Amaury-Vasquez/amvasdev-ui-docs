@@ -5,7 +5,11 @@ import ExampleBlock from "@/components/documentation/ExampleBlock";
 const BasicUsageExample = () => (
   <ExampleBlock
     title="Basic Usage"
-    preview={<Button>Click me</Button>}
+    preview={
+      <Button id="basic-button-example" aria-label="Basic button example">
+        Click me
+      </Button>
+    }
     code={`<Button>Click me</Button>`}
   />
 );

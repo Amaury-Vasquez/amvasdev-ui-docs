@@ -108,6 +108,7 @@ export default function NotFound() {
           <button
             onClick={() => router.back()}
             className="inline-flex items-center gap-2 text-sm text-base-content/60 hover:text-primary transition-colors group"
+            id="not-found-go-back-button"
             aria-label="Go back to previous page"
           >
             <ArrowLeft

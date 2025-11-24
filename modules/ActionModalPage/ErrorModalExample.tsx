@@ -11,7 +11,12 @@ const ErrorModalExample = () => {
       title="Error Modal with Loading"
       preview={
         <>
-          <Button variant="primary" onClick={() => setIsOpen(true)}>
+          <Button
+            variant="primary"
+            onClick={() => setIsOpen(true)}
+            id="error-modal-open-button"
+            aria-label="Open error modal"
+          >
             Show Error Modal
           </Button>
           {isOpen && (

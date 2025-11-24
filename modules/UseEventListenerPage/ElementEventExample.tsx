@@ -21,7 +21,12 @@ const ElementEventExample = () => {
       <p className="text-base-content/70 mb-4">
         Click the button to increment the counter:
       </p>
-      <Button ref={buttonRef} variant="primary">
+      <Button
+        ref={buttonRef}
+        variant="primary"
+        id="event-listener-button"
+        aria-label={`Click counter button, current count: ${clickCount}`}
+      >
         Click Me! (Count: {clickCount})
       </Button>
     </div>

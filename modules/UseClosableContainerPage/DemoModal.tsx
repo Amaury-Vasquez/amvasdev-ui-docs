@@ -31,7 +31,12 @@ const DemoModal = ({ onClose }: DemoModalProps) => {
           <li>Click outside the modal</li>
           <li>Click the close button</li>
         </ul>
-        <Button variant="primary" onClick={handleClose}>
+        <Button
+          variant="primary"
+          onClick={handleClose}
+          id="demo-modal-close-button"
+          aria-label="Close demo modal"
+        >
           Close Modal
         </Button>
       </div>

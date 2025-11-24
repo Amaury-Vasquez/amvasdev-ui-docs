@@ -18,6 +18,8 @@ const CustomTooltipExample = () => (
           ),
           position: "down",
         }}
+        id="icon-button-custom-tooltip"
+        aria-label="Delete item, cannot be undone"
       />
     }
     code={`<IconButton

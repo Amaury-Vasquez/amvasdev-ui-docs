@@ -9,7 +9,12 @@ const ThemeModal = () => {
 
   return (
     <div>
-      <button className="flex items-center gap-2" onClick={toggleModal}>
+      <button
+        className="flex items-center gap-2"
+        onClick={toggleModal}
+        id="theme-modal-toggle-button"
+        aria-label="Open theme selection modal"
+      >
         <Palette />
         Choose your theme
       </button>

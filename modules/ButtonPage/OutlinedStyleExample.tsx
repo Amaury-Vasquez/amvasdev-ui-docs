@@ -7,10 +7,20 @@ const OutlinedStyleExample = () => (
     title="Outlined Style"
     preview={
       <>
-        <Button variant="primary" outlined>
+        <Button
+          variant="primary"
+          outlined
+          id="outlined-primary-button"
+          aria-label="Outlined primary button"
+        >
           Outlined Primary
         </Button>
-        <Button variant="error" outlined>
+        <Button
+          variant="error"
+          outlined
+          id="outlined-error-button"
+          aria-label="Outlined error button"
+        >
           Outlined Error
         </Button>
       </>

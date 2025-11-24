@@ -51,6 +51,7 @@ const ExpandedNav = ({ pathname }: ExpandedNavProps) => {
             <button
               onClick={() => toggleSection(title)}
               className="px-2 mb-1 text-xs font-semibold text-base-content/60 uppercase tracking-wider flex gap-2 items-center hover:text-base-content transition-colors w-full text-left"
+              id={`nav-section-${title.toLowerCase().replace(/\s+/g, "-")}-toggle`}
               aria-label={`${isExpanded ? "Collapse" : "Expand"} ${title} section`}
               aria-expanded={isExpanded}
             >
