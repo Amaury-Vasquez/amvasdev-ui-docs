@@ -5,11 +5,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Project Overview
 
 This is a Next.js 16 documentation site for the `amvasdev-ui` component library. The project uses:
+
 - **Next.js 16** with App Router architecture
 - **React 19** (latest version)
 - **TypeScript** with strict mode enabled
 - **Tailwind CSS v4** for styling
-- **MDX** for writing documentation pages with React components
 
 ## Key Commands
 
@@ -30,17 +30,12 @@ npm run lint         # Run ESLint
 This is a Next.js App Router project with the following architecture:
 
 - **`app/`** - Next.js App Router directory
+
   - `layout.tsx` - Root layout with Geist Sans and Geist Mono fonts
   - `page.tsx` - Homepage/landing page
   - `globals.css` - Global styles with Tailwind CSS imports
 
-- **`mdx-components.tsx`** - MDX component customization (required for App Router)
-  - Define custom styling for MDX elements (h1, h2, p, code, etc.)
-  - Override default markdown rendering with React components
-
-- **`next.config.mjs`** - Next.js configuration with MDX support
-  - Enables `.md` and `.mdx` file extensions as valid page routes
-  - Configured with `@next/mdx` for processing MDX files
+- **`next.config.js`** - Next.js configuration
 
 - **`COMPONENT_USAGE_GUIDE.md`** - **CRITICAL CONTEXT FILE**
   - This file contains comprehensive documentation for the `amvasdev-ui` library
@@ -63,26 +58,27 @@ This is a Next.js App Router project with the following architecture:
 **IMPORTANT**: Always use implicit returns for arrow functions when there's no additional logic:
 
 **✅ Correct:**
-```tsx
-const Component = () => (
-  <div>Content</div>
-)
 
-const items = data.map(item => item.name)
+```tsx
+const Component = () => <div>Content</div>;
+
+const items = data.map((item) => item.name);
 ```
 
 **❌ Incorrect:**
+
 ```tsx
 const Component = () => {
-  return <div>Content</div>
-}
+  return <div>Content</div>;
+};
 
-const items = data.map(item => {
-  return item.name
-})
+const items = data.map((item) => {
+  return item.name;
+});
 ```
 
 **When to use braces:**
+
 - When you need multiple statements or logic before the return
 - When you need variable declarations
 - When you have conditional logic
@@ -94,6 +90,7 @@ const items = data.map(item => {
 **CRITICAL: Never use buttons as links.** Always use proper semantic HTML elements:
 
 **✅ Correct:**
+
 ```tsx
 // For navigation, use Link or anchor tags
 import Link from "next/link";
@@ -119,6 +116,7 @@ import CustomLink from "@/components/CustomLink";
 ```
 
 **❌ Incorrect:**
+
 ```tsx
 // Never use buttons with router.push or onClick navigation
 import { useRouter } from "next/navigation";
@@ -130,6 +128,7 @@ const router = useRouter();
 ```
 
 **Why this matters:**
+
 - **Accessibility**: Screen readers understand links vs buttons
 - **SEO**: Search engines can crawl and index link relationships
 - **User Experience**: Right-click → "Open in new tab" works properly
@@ -137,18 +136,21 @@ const router = useRouter();
 - **Semantic HTML**: Buttons are for actions, links are for navigation
 
 **When to use each:**
+
 - **`<Link>` or `<a>`**: Basic navigation to different pages/routes
 - **`<CustomLink>`**: Navigation that should look like a button (CTAs, primary actions)
 - **`<IconLink>`**: Icon-based navigation with tooltip support
 - **`<button>`**: Triggering actions (submit forms, toggle modals, open dropdowns, etc.)
 
 **Available Link Components:**
+
 - **`IconLink`** (`@/components/IconLink`) - Icon with tooltip, styled as circular button
 - **`CustomLink`** (`@/components/CustomLink`) - Text link styled as button with variant/size options
 
 ### Import Organization
 
 Imports are automatically sorted by ESLint in this order:
+
 1. Node.js built-in modules
 2. External packages (node_modules)
 3. Internal aliased imports (@/)
@@ -162,6 +164,7 @@ All groups are sorted alphabetically and should have no blank lines between them
 **Static Constants**: Use SCREAMING_SNAKE_CASE for module-level constants that are never reassigned:
 
 **✅ Correct:**
+
 ```tsx
 export const COMPONENTS_DATA: Record<string, ComponentData> = { ... };
 export const API_BASE_URL = "https://api.example.com";
@@ -169,6 +172,7 @@ export const MAX_RETRY_ATTEMPTS = 3;
 ```
 
 **❌ Incorrect:**
+
 ```tsx
 export const componentsData: Record<string, ComponentData> = { ... };
 export const apiBaseUrl = "https://api.example.com";
@@ -176,11 +180,13 @@ export const maxRetryAttempts = 3;
 ```
 
 **Why this matters:**
+
 - Immediately identifies values that should never change
 - Distinguishes static data from reactive state or mutable variables
 - Follows common JavaScript/TypeScript conventions for constants
 
 **When to use:**
+
 - Static configuration objects that never change
 - Hardcoded lookup tables or data structures
 - API URLs, magic numbers, or other fixed values
@@ -193,21 +199,19 @@ export const maxRetryAttempts = 3;
 **IMPORTANT**: When you need to detect the device type on the client side, always use the `DeviceContext`:
 
 **✅ Correct:**
+
 ```tsx
 import { useDevice } from "@/contexts/DeviceContext";
 
 export default function Component() {
   const { isMobile, isTablet, isMobileOrTablet } = useDevice();
 
-  return (
-    <div>
-      {isMobile ? <MobileView /> : <DesktopView />}
-    </div>
-  );
+  return <div>{isMobile ? <MobileView /> : <DesktopView />}</div>;
 }
 ```
 
 **❌ Incorrect:**
+
 ```tsx
 // Don't call the hooks directly in components
 import useIsMobile from "@/hooks/useIsMobile";
@@ -219,17 +223,20 @@ export default function Component() {
 ```
 
 **Why this matters:**
+
 - The hooks use `useBreakpoint` which listens to window resize events
 - Calling them multiple times creates multiple event listeners
 - The context calls the hooks once and shares the values across all components
 - Better performance and reduced memory usage
 
 **Available values from `useDevice()`:**
+
 - `isMobile`: boolean - viewport is <= 640px (sm breakpoint)
 - `isTablet`: boolean - viewport is >= 640px and < 1024px (sm to lg)
 - `isMobileOrTablet`: boolean - viewport is < 1024px (lg breakpoint)
 
 **Context Location:**
+
 - Provider: `DeviceProvider` from `@/contexts/DeviceContext`
 - Hook: `useDevice()` from `@/contexts/DeviceContext`
 - Must be used within the `DeviceProvider` (already set up in Sidebar)
@@ -256,44 +263,6 @@ When creating documentation or examples for `amvasdev-ui` components:
 - CSS variables for theming: `--background`, `--foreground`, `--font-sans`, `--font-mono`
 - Dark mode handled automatically via `prefers-color-scheme`
 
-### Working with MDX
-
-MDX is configured and ready to use for creating documentation pages:
-
-**Creating MDX Pages:**
-- Place `.mdx` files directly in `app/` for file-based routing
-- Example: `app/docs/button/page.mdx` creates `/docs/button` route
-
-**Importing MDX Files:**
-```tsx
-import ComponentDoc from '@/content/component-doc.mdx'
-
-export default function Page() {
-  return <ComponentDoc />
-}
-```
-
-**Using React Components in MDX:**
-```mdx
-import { Button } from 'amvasdev-ui'
-
-# Button Component
-
-Here's a live example:
-
-<Button variant="primary">Click me</Button>
-```
-
-**Customizing MDX Components:**
-- Edit `mdx-components.tsx` to style all MDX elements globally
-- Override components per-page by passing `components` prop
-- Use shared layouts in `app/` for consistent page structure
-
-**Important Notes:**
-- MDX files support both `.md` and `.mdx` extensions
-- All React components used in MDX must be imported at the top
-- Client components in MDX require `"use client"` directive in the importing page
-
 ## Code Formatting Standards
 
 ### Template Literal Indentation
@@ -301,6 +270,7 @@ Here's a live example:
 **CRITICAL**: When writing code examples in template literals, add 2 spaces to each continuation line to ensure proper indentation display:
 
 **✅ Correct:**
+
 ```tsx
 <code>
   {`import { Button } from "amvasdev-ui";
@@ -314,6 +284,7 @@ Here's a live example:
 ```
 
 **❌ Incorrect:**
+
 ```tsx
 <code>
   {`import { Button } from "amvasdev-ui";
@@ -326,6 +297,7 @@ function App() {
 ```
 
 **Why this matters:**
+
 - Template literals don't preserve source code indentation
 - The rendered output will show no indentation without explicit spacing
 - Always add 2 spaces at the start of each line after the first one
@@ -335,17 +307,19 @@ function App() {
 **Prefer nullish coalescing over logical AND** for checking array/object properties:
 
 **✅ Correct:**
+
 ```tsx
-{(data.items?.length ?? 0) > 0 ? (
-  <div>Content</div>
-) : null}
+{
+  (data.items?.length ?? 0) > 0 ? <div>Content</div> : null;
+}
 ```
 
 **❌ Incorrect:**
+
 ```tsx
-{data.items?.length && (
-  <div>Content</div>
-)}
+{
+  data.items?.length && <div>Content</div>;
+}
 ```
 
 ## Project Architecture
@@ -355,6 +329,7 @@ function App() {
 **CRITICAL**: All documentation pages use a module-based architecture to support SEO metadata while maintaining client-side interactivity.
 
 **Structure:**
+
 ```
 app/
   components/
@@ -377,6 +352,7 @@ components/documentation/   # Shared documentation components
 ```
 
 **Page Pattern (app/.../page.tsx):**
+
 ```tsx
 import type { Metadata } from "next";
 import ButtonPage from "@/modules/ButtonPage";
@@ -395,6 +371,7 @@ export default function Page() {
 ```
 
 **Module Index Pattern (modules/ButtonPage/index.tsx):**
+
 ```tsx
 import PageHeader from "@/components/documentation/PageHeader";
 import ImportSection from "@/components/documentation/ImportSection";
@@ -406,7 +383,10 @@ const componentData = COMPONENTS_DATA.button;
 
 const ButtonPage = () => (
   <div className="flex flex-col gap-4 p-4 md:gap-8 md:p-8">
-    <PageHeader title={componentData.name} description={componentData.description} />
+    <PageHeader
+      title={componentData.name}
+      description={componentData.description}
+    />
     <ImportSection importStatement={componentData.importStatement} />
     <BasicUsageExample />
     {/* ... more content */}
@@ -417,6 +397,7 @@ export default ButtonPage;
 ```
 
 **Page-Specific Components (modules/ButtonPage/BasicUsageExample.tsx):**
+
 ```tsx
 "use client";
 import { Button } from "amvasdev-ui";
@@ -434,11 +415,13 @@ export default BasicUsageExample;
 ```
 
 **Naming Conventions:**
+
 - **Modules:** CamelCase (e.g., `ButtonPage`, `UseTogglePage`)
 - **Module exports:** Same as folder name (e.g., `ButtonPage`)
 - **Page-specific components:** Descriptive names (e.g., `BasicUsageExample`, `VariantsExample`)
 
 **Shared Documentation Components:**
+
 - `PageHeader` - Title and description
 - `ImportSection` - Import code block
 - `ExampleBlock` - Example with preview and code
@@ -446,6 +429,7 @@ export default BasicUsageExample;
 - `NotesSection` - Notes list
 
 **"use client" Directive:**
+
 - Add ONLY to page-specific components that render client components (Button, Input, etc.)
 - NOT needed in module index.tsx (child components already have it)
 - NOT needed in page.tsx (server component for metadata)
@@ -458,6 +442,7 @@ export default BasicUsageExample;
 All documentation metadata is stored in `/data` directory using SCREAMING_SNAKE_CASE for exports:
 
 **`/data/components.ts`**
+
 ```tsx
 export const COMPONENTS_DATA: Record<string, ComponentData> = {
   "component-name": {
@@ -473,6 +458,7 @@ export const COMPONENTS_DATA: Record<string, ComponentData> = {
 ```
 
 **`/data/hooks.ts`**
+
 ```tsx
 export const HOOKS_DATA: Record<string, HookData> = {
   "hook-name": {
@@ -489,6 +475,7 @@ export const HOOKS_DATA: Record<string, HookData> = {
 ```
 
 **`/data/utilities.ts`**
+
 ```tsx
 export const UTILITIES_DATA: Record<string, UtilityData> = {
   "utility-name": {
@@ -507,6 +494,7 @@ export const UTILITIES_DATA: Record<string, UtilityData> = {
 All documentation pages follow a consistent structure:
 
 **Component Pages** (`/app/components/[slug]/page.tsx`):
+
 1. Import component metadata from `COMPONENTS_DATA`
 2. Client component if interactive demos are needed
 3. Sections in order:
@@ -519,6 +507,7 @@ All documentation pages follow a consistent structure:
    - Notes (if applicable)
 
 **Hook Pages** (`/app/hooks/[slug]/page.tsx`):
+
 1. Import hook metadata from `HOOKS_DATA`
 2. Always client component for live demos
 3. Sections in order:
@@ -532,6 +521,7 @@ All documentation pages follow a consistent structure:
    - Notes (if applicable)
 
 **Utility Pages** (`/app/utilities/[slug]/page.tsx`):
+
 1. Import utility metadata from `UTILITIES_DATA`
 2. Client component for interactive demos
 3. Sections in order:
@@ -577,9 +567,7 @@ export default function ComponentPage() {
       {/* Examples */}
       <div>
         <h2 className="text-2xl font-semibold mb-4">Examples</h2>
-        <div className="space-y-8">
-          {/* Example content */}
-        </div>
+        <div className="space-y-8">{/* Example content */}</div>
       </div>
 
       {/* Conditional sections using nullish coalescing */}
@@ -629,6 +617,7 @@ const MainLayout = ({ children }: MainLayoutProps) => (
 ```
 
 **Key Layout Classes:**
+
 - Use `h-svh` for small viewport height (not `min-h-screen`)
 - Main content uses `flex-1` to fill available space
 - Footer automatically sticks to bottom
@@ -636,17 +625,20 @@ const MainLayout = ({ children }: MainLayoutProps) => (
 ### Shared Components
 
 **CustomLink** (`/components/CustomLink`):
+
 - Links styled as buttons with variant and size options
 - Use for CTAs and primary navigation that should look like buttons
 - Supports all button variants (primary, secondary, success, etc.)
 
 **IconLink** (`/components/IconLink`):
+
 - Icon-based links with tooltip support
 - Circular ghost button styling
 - Use for social links, external resources
 - Tooltip positions: "top", "bottom", "left", "right"
 
 **Footer** (`/components/Footer`):
+
 - Four-column grid layout (responsive: 1 → 2 → 4 columns)
 - Sections: About, Documentation, Resources, Built With
 - Prominent DaisyUI credit with heart icon
@@ -683,7 +675,9 @@ export default function Page() {
             onChange={(e) => setVariant(e.target.value as any)}
           >
             {VARIANTS.map((v) => (
-              <option key={v} value={v}>{v}</option>
+              <option key={v} value={v}>
+                {v}
+              </option>
             ))}
           </select>
         </div>

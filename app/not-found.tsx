@@ -1,11 +1,23 @@
 "use client";
 import { ArrowLeft, BookOpen, Boxes, Home, Search } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { usePostHog } from "posthog-js/react";
+import { useEffect } from "react";
 import CustomLink from "@/components/CustomLink";
 
 export default function NotFound() {
+  const pathname = usePathname();
   const router = useRouter();
+  const posthog = usePostHog();
+
+  useEffect(() => {
+    posthog.captureException("404 page not found", {
+      pathname,
+      status: 404,
+    });
+  }, [pathname, posthog]);
+
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] px-4 py-12">
       <div className="max-w-2xl w-full text-center space-y-8">
@@ -29,18 +41,28 @@ export default function NotFound() {
             Oops! This page seems to have wandered off
           </h2>
           <p className="text-base-content/70 text-base max-w-md mx-auto">
-            The page you&apos;re looking for doesn&apos;t exist or may have been moved.
-            Let&apos;s get you back on track.
+            The page you&apos;re looking for doesn&apos;t exist or may have been
+            moved. Let&apos;s get you back on track.
           </p>
         </div>
 
         {/* Quick Actions */}
         <div className="flex flex-col sm:flex-row gap-3 justify-center items-center pt-4">
-          <CustomLink href="/" variant="primary" size="lg" className="gap-2 min-w-[160px]">
+          <CustomLink
+            href="/"
+            variant="primary"
+            size="lg"
+            className="gap-2 min-w-[160px]"
+          >
             <Home size={18} />
             Go Home
           </CustomLink>
-          <CustomLink href="/components" variant="secondary" size="lg" className="gap-2 min-w-[160px]">
+          <CustomLink
+            href="/components"
+            variant="secondary"
+            size="lg"
+            className="gap-2 min-w-[160px]"
+          >
             <Boxes size={18} />
             Browse Components
           </CustomLink>
