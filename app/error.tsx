@@ -1,6 +1,6 @@
 "use client";
 import { AlertTriangle, ArrowLeft, Home, RefreshCw } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { usePostHog } from "posthog-js/react";
 import { useEffect } from "react";
 import CustomLink from "@/components/CustomLink";
@@ -12,6 +12,7 @@ interface ErrorProps {
 
 export default function Error({ error, reset }: ErrorProps) {
   const pathname = usePathname();
+  const router = useRouter();
   const posthog = usePostHog();
 
   useEffect(() => {
@@ -66,6 +67,7 @@ export default function Error({ error, reset }: ErrorProps) {
           <button
             onClick={reset}
             className="btn btn-primary btn-lg gap-2 min-w-[160px]"
+            aria-label="Try again"
           >
             <RefreshCw size={18} />
             Try Again
@@ -75,6 +77,7 @@ export default function Error({ error, reset }: ErrorProps) {
             variant="secondary"
             size="lg"
             className="gap-2 min-w-[160px]"
+            ariaLabel="Go to home page"
           >
             <Home size={18} />
             Go Home
@@ -105,8 +108,9 @@ export default function Error({ error, reset }: ErrorProps) {
         {/* Back Navigation */}
         <div className="pt-4">
           <button
-            onClick={() => window.history.back()}
+            onClick={() => router.back()}
             className="inline-flex items-center gap-2 text-sm text-base-content/60 hover:text-primary transition-colors group"
+            aria-label="Go back to previous page"
           >
             <ArrowLeft
               size={16}

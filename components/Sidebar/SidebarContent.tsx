@@ -35,7 +35,11 @@ const SidebarContent = forwardRef<HTMLDivElement, SidebarContentProps>(
         })}
       >
         {isExpanded ? (
-          <Link href="/" className="flex flex-col gap-0.5">
+          <Link
+            href="/"
+            className="flex flex-col gap-0.5"
+            aria-label="Go to home page"
+          >
             <div className="flex items-baseline gap-1">
               <Logo />
             </div>
@@ -53,6 +57,7 @@ const SidebarContent = forwardRef<HTMLDivElement, SidebarContentProps>(
             )
           }
           onClick={toggleIsExpanded}
+          aria-label={isExpanded ? "Collapse sidebar" : "Expand sidebar"}
         />
       </div>
 

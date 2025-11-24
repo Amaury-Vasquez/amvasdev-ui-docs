@@ -36,6 +36,7 @@ const Searchbar = () => {
               <Link
                 href={result.basePath}
                 className="p-4 w-full flex text-sm font-medium hover:bg-base-200"
+                aria-label={`Navigate to ${result.title}`}
               >
                 {result.title}
               </Link>

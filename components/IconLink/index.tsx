@@ -3,6 +3,7 @@ import { getIconButtonClasses, Tooltip } from "amvasdev-ui";
 import clsx, { ClassValue } from "clsx";
 import Link from "next/link";
 import { ReactNode, useState } from "react";
+import { getAriaLabelFromHref } from "@/utils/accesibility";
 
 type TooltipPosition = "top" | "down" | "left" | "right";
 
@@ -17,6 +18,7 @@ interface IconLinkProps {
   icon: ReactNode;
   tooltip?: TooltipData;
   target?: string;
+  ariaLabel?: string;
 }
 
 const IconLink = ({
@@ -25,6 +27,7 @@ const IconLink = ({
   icon,
   tooltip,
   target,
+  ariaLabel,
 }: IconLinkProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -44,6 +47,7 @@ const IconLink = ({
       onBlur={() => setIsFocused(false)}
       target={target}
       onClick={onMouseLeave}
+      aria-label={ariaLabel ?? getAriaLabelFromHref(href)}
     >
       {icon}
       {(isHovered || isFocused) && tooltip ? (

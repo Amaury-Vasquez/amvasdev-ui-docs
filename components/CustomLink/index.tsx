@@ -3,6 +3,7 @@ import { ButtonSize, ButtonVariant, getButtonClasses } from "amvasdev-ui";
 import clsx from "clsx";
 import Link from "next/link";
 import { ReactNode } from "react";
+import { getAriaLabelFromHref } from "@/utils/accesibility";
 
 interface CustomLinkProps {
   href: string;
@@ -12,6 +13,7 @@ interface CustomLinkProps {
   outlined?: boolean;
   className?: string;
   target?: string;
+  ariaLabel?: string;
 }
 
 /**
@@ -38,6 +40,7 @@ const CustomLink = ({
   outlined = false,
   className = "",
   target = "_self",
+  ariaLabel,
 }: CustomLinkProps) => {
   const buttonClasses = getButtonClasses({
     variant,
@@ -50,6 +53,7 @@ const CustomLink = ({
       href={href}
       className={clsx(buttonClasses, className)}
       target={target}
+      aria-label={ariaLabel ?? getAriaLabelFromHref(href)}
     >
       {children}
     </Link>

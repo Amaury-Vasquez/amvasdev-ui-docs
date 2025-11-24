@@ -51,6 +51,8 @@ const ExpandedNav = ({ pathname }: ExpandedNavProps) => {
             <button
               onClick={() => toggleSection(title)}
               className="px-2 mb-1 text-xs font-semibold text-base-content/60 uppercase tracking-wider flex gap-2 items-center hover:text-base-content transition-colors w-full text-left"
+              aria-label={`${isExpanded ? "Collapse" : "Expand"} ${title} section`}
+              aria-expanded={isExpanded}
             >
               <Icon size={16} />
               <span className="flex-1">{title}</span>
@@ -83,6 +85,7 @@ const ExpandedNav = ({ pathname }: ExpandedNavProps) => {
                             pathname === link.href,
                         }
                       )}
+                      aria-label={`Navigate to ${link.label}`}
                     >
                       {link.label}
                     </Link>
@@ -96,6 +99,7 @@ const ExpandedNav = ({ pathname }: ExpandedNavProps) => {
             key={title}
             href={basePath}
             className="px-2 mb-1 text-xs font-semibold text-base-content/60 uppercase tracking-wider flex gap-2 items-center hover:text-base-content transition-colors w-full text-left"
+            aria-label={`Navigate to ${title}`}
           >
             <Icon size={16} />
             <span className="flex-1">{title}</span>

@@ -7,11 +7,12 @@ import ThemeModal from "./ThemeModal";
 
 const MobileNavMenu = () => (
   <HamburgerMenu icon={Menu} className="md:hidden" position="right">
-    <div className="flex flex-col w-48 gap-4 p-2">
+    <nav className="flex flex-col w-48 gap-4 p-2">
       <Link
         className="flex items-center gap-2"
         href={NPM_PACKAGE_URL}
         target="_blank"
+        aria-label="View amvasdev-ui NPM package"
       >
         <Boxes />
         NPM package
@@ -20,12 +21,13 @@ const MobileNavMenu = () => (
         className="flex items-center gap-2"
         href={GITHUB_URL}
         target="_blank"
+        aria-label="Explore amvasdev-ui source code on GitHub"
       >
         <Github />
         Explore code
       </Link>
       <ThemeModal />
-    </div>
+    </nav>
   </HamburgerMenu>
 );
 

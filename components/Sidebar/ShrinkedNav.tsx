@@ -24,6 +24,7 @@ const ShrinkedNav = ({ pathname }: ShrinkedNavProps) => (
           className={clsx("w-10 h-10", {
             "bg-base-300 text-primary": isActive,
           })}
+          ariaLabel={`Navigate to ${section.title}`}
         />
       );
     })}

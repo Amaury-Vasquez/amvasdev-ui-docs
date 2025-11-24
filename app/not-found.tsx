@@ -53,6 +53,7 @@ export default function NotFound() {
             variant="primary"
             size="lg"
             className="gap-2 min-w-[160px]"
+            ariaLabel="Go to home page"
           >
             <Home size={18} />
             Go Home
@@ -62,6 +63,7 @@ export default function NotFound() {
             variant="secondary"
             size="lg"
             className="gap-2 min-w-[160px]"
+            ariaLabel="Browse all components"
           >
             <Boxes size={18} />
             Browse Components
@@ -77,6 +79,7 @@ export default function NotFound() {
             <Link
               href="/"
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-base-200 hover:bg-base-300 text-sm text-base-content/80 hover:text-primary transition-colors"
+              aria-label="Go to Getting Started page"
             >
               <BookOpen size={14} />
               <span>Getting Started</span>
@@ -84,6 +87,7 @@ export default function NotFound() {
             <Link
               href="/components/button"
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-base-200 hover:bg-base-300 text-sm text-base-content/80 hover:text-primary transition-colors"
+              aria-label="Go to button component"
             >
               <Boxes size={14} />
               <span>Button</span>
@@ -91,6 +95,7 @@ export default function NotFound() {
             <Link
               href="/hooks"
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-base-200 hover:bg-base-300 text-sm text-base-content/80 hover:text-primary transition-colors"
+              aria-label="Go to hooks"
             >
               <Search size={14} />
               <span>Hooks</span>
@@ -103,6 +108,7 @@ export default function NotFound() {
           <button
             onClick={() => router.back()}
             className="inline-flex items-center gap-2 text-sm text-base-content/60 hover:text-primary transition-colors group"
+            aria-label="Go back to previous page"
           >
             <ArrowLeft
               size={16}

@@ -14,13 +14,14 @@ export default function Home() {
           implementations
         </p>
         <div className="flex flex-col gap-4 justify-center md:flex-row">
-          <CustomLink href="/components" variant="primary" size="lg">
+          <CustomLink href="/components" variant="primary" size="lg" ariaLabel="Browse all components">
             Browse Components
           </CustomLink>
           <CustomLink
             href="https://www.npmjs.com/package/amvasdev-ui"
             variant="ghost"
             size="lg"
+            ariaLabel="View amvasdev-ui package on NPM"
           >
             View on NPM
           </CustomLink>
@@ -151,6 +152,7 @@ export default function Home() {
           <Link
             href="/components"
             className="p-6 bg-base-200 rounded-lg hover:bg-base-300 transition-colors"
+            aria-label="Browse all components"
           >
             <h3 className="text-xl font-semibold mb-2">📚 Browse Components</h3>
             <p className="text-base-content/70">
@@ -161,6 +163,7 @@ export default function Home() {
           <Link
             href="/hooks"
             className="p-6 bg-base-200 rounded-lg hover:bg-base-300 transition-colors"
+            aria-label="View utility hooks documentation"
           >
             <h3 className="text-xl font-semibold mb-2">🔌 Utility Hooks</h3>
             <p className="text-base-content/70">
@@ -171,6 +174,7 @@ export default function Home() {
           <Link
             href="/theming"
             className="p-6 bg-base-200 rounded-lg hover:bg-base-300 transition-colors"
+            aria-label="View theming guide"
           >
             <h3 className="text-xl font-semibold mb-2">🎨 Theming Guide</h3>
             <p className="text-base-content/70">

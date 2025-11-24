@@ -62,12 +62,14 @@ const Footer = () => (
               target="_blank"
               icon={<Github size={20} />}
               tooltip={{ content: "View on GitHub", position: "top" }}
+              ariaLabel="View amvasdev-ui repository on GitHub"
             />
             <IconLink
               href="https://www.npmjs.com/package/amvasdev-ui"
               target="_blank"
               icon={<Boxes size={20} />}
               tooltip={{ content: "View on NPM", position: "top" }}
+              ariaLabel="View amvasdev-ui package on NPM"
             />
           </div>
         </div>
@@ -81,6 +83,7 @@ const Footer = () => (
                 <Link
                   href={link.href}
                   className="text-sm text-base-content/70 hover:text-primary transition-colors"
+                  aria-label={`View ${link.label} documentation`}
                 >
                   {link.label}
                 </Link>
@@ -100,6 +103,7 @@ const Footer = () => (
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-base-content/70 hover:text-primary transition-colors inline-flex items-center gap-1"
+                  aria-label={`Visit ${link.label === "GitHub" ? "amvasdev-ui GitHub repository" : "amvasdev-ui on NPM"}`}
                 >
                   {link.icon}
                   {link.label}
@@ -120,6 +124,7 @@ const Footer = () => (
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-base-content/70 hover:text-primary transition-colors inline-flex items-center gap-1"
+                  aria-label={`Visit ${link.label} official website`}
                 >
                   {link.icon}
                   {link.label}
@@ -141,6 +146,7 @@ const Footer = () => (
             target="_blank"
             rel="noopener noreferrer"
             className="font-semibold text-primary hover:underline"
+            aria-label="Visit DaisyUI official website"
           >
             DaisyUI
           </a>
